@@ -2,4 +2,5 @@ import streamlit as st
 
 st.title("My Parents new healthy diner")
 st.header("BreakFast MENU")
-st.text("Omega soups")
+st.header("Soups")
+st.text("Omega lettuce soup")
