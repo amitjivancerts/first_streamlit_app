@@ -1,6 +1,6 @@
 import streamlit
 import pandas
-import requests , time
+import requests
 
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
