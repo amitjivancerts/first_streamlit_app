@@ -53,7 +53,7 @@ if (streamlit.button('Click to List Fruit List')):
   streamlit.dataframe(my_data_row)
 
 new_fruit = streamlit.text_input('What fruit would you like to add ?')  
-if (streamlit.button('Add a Fruit)):
+if (streamlit.button('Add a Fruit')):
   result = insertdata(new_fruit)
   streamlit.text(result)
 
