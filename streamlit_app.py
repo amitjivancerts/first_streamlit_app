@@ -1,7 +1,8 @@
 import streamlit
-import pandas
+#import pandas
 import requests
 import snowflake.connector
+from urllib.error from URLError
 
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
@@ -24,12 +25,15 @@ fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_cho
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 streamlit.dataframe(fruityvice_normalized)
 
+streamlit.stop()
+
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
 my_data_row = my_cur.fetchall()
 #my_data_row = my_data_row.set_index('FRUIT_NAME')
 streamlit.header("Fruit list contains:")
-snow_fruits_selected = streamlit.multiselect("What fruit would you like to add ?:", ['banana','cherry'],['banana'])
-streamlit.text(snow_fruits_selected)
-#streamlit.dataframe(snow_fruits_selected)
+#streamlit.text(snow_fruits_selected)
+streamlit.dataframe(my_data_row)
+add_fruit = st.text_input('What Fruit would you like to add ?')
+my_cur.execute("SELECT * from FRUIT_LOAD_LIST where fruit_name ")
