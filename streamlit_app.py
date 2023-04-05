@@ -10,6 +10,12 @@ def normalize_data(fruit_choice):
   #streamlit.text(fruityvice_response.json())
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
   return fruityvice_normalized
+
+def getdata():
+  my_cur = my_cnx.cursor()
+  my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
+  my_data_row = my_cur.fetchall()
+  return my_data_row
   
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
@@ -38,12 +44,9 @@ except URLError  as e :
 streamlit.stop()
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
-my_data_row = my_cur.fetchall()
-#my_data_row = my_data_row.set_index('FRUIT_NAME')
-streamlit.header("Fruit list contains:")
-#streamlit.text(snow_fruits_selected)
-streamlit.dataframe(my_data_row)
-add_fruit = streamlit.text_input('What Fruit would you like to add ?')
-my_cur.execute("SELECT * from FRUIT_LOAD_LIST where fruit_name ")
+if (streamlit.button('Click to List Fruit List')):
+  my_data_row = getdata()
+  streamlit.header("Fruit list contains:")
+  streamlit.dataframe(my_data_row)
+#add_fruit = streamlit.text_input('What Fruit would you like to add ?')
+#my_cur.execute("SELECT * from FRUIT_LOAD_LIST where fruit_name ")
