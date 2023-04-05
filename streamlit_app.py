@@ -4,6 +4,9 @@ import requests
 import snowflake.connector
 from urllib.error import URLError
 
+
+def normalize_data():
+  
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
 streamlit.text('🥗 Kale, Spinach & Rocket Smoothie')
@@ -19,7 +22,7 @@ streamlit.dataframe(fruits_to_show)
 
 streamlit.header('🍌🥭 Fruityvice Fruit Advise 🥝🍇')
 try:
-  fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+  fruit_choice = streamlit.text_input('What fruit would you like information about?')
   if not fruit_choice:
     streamlit.error("Please provide a fruit")
   else:
