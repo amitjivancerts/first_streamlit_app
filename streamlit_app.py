@@ -16,6 +16,11 @@ def getdata():
   my_cur.execute("SELECT * from FRUIT_LOAD_LIST")
   my_data_row = my_cur.fetchall()
   return my_data_row
+
+def insertdata(new_fruit):
+  my_cur = my_cnx.cursor()
+  my_cur.execute(f"insert into FRUIT_LOAD_LIST values(\'{new_fruit}\')")
+  return "Record Added Successfully"
   
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
@@ -46,5 +51,12 @@ if (streamlit.button('Click to List Fruit List')):
   my_data_row = getdata()
   streamlit.header("Fruit list contains:")
   streamlit.dataframe(my_data_row)
+
+new_fruit = streamlit.text_input('What fruit would you like to add ?')  
+if (streamlit.button('Add a Fruit)):
+  result = insertdata(new_fruit)
+  streamlit.text(result)
+
+  
 #add_fruit = streamlit.text_input('What Fruit would you like to add ?')
 #my_cur.execute("SELECT * from FRUIT_LOAD_LIST where fruit_name ")
