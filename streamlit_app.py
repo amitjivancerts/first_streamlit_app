@@ -18,12 +18,18 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
 
 streamlit.header('🍌🥭 Fruityvice Fruit Advise 🥝🍇')
-fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
-streamlit.write('The user entered ', fruit_choice)
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
-#streamlit.text(fruityvice_response.json())
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-streamlit.dataframe(fruityvice_normalized)
+try:
+  fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
+  if not fruit_choice:
+    streamlit.write("Please provide a fruit")
+  else:
+    streamlit.write('The user entered ', fruit_choice)
+    fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
+    #streamlit.text(fruityvice_response.json())
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    streamlit.dataframe(fruityvice_normalized)
+except URLError  as e :
+  streamlit.error()
 
 streamlit.stop()
 
@@ -35,5 +41,5 @@ my_data_row = my_cur.fetchall()
 streamlit.header("Fruit list contains:")
 #streamlit.text(snow_fruits_selected)
 streamlit.dataframe(my_data_row)
-add_fruit = st.text_input('What Fruit would you like to add ?')
+add_fruit = streamlit.text_input('What Fruit would you like to add ?')
 my_cur.execute("SELECT * from FRUIT_LOAD_LIST where fruit_name ")
