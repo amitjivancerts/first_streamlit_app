@@ -9,6 +9,7 @@ def normalize_data(fruit_choice):
   fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
   #streamlit.text(fruityvice_response.json())
   fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+  return fruityvice_normalized
   
 streamlit.header('Breakfast Favorites')
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
